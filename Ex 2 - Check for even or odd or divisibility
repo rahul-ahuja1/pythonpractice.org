@@ -1,0 +1,37 @@
+"""
+Exercise 2
+Ask the user for a number. Depending on whether the number is even or odd, 
+print out an appropriate message to the user. 
+Hint: how does an even / odd number react differently when divided by 2?
+
+Extras:
+
+1) If the number is a multiple of 4, print out a different message.
+Ask the user for two numbers: one number to check (call it num) and one number to divide by (check). 
+2) If check divides evenly into num, tell that to the user. If not, print a different appropriate message.
+
+"""
+
+num = float(input("Enter a no.: "))
+if num % 2 == 0:
+    print("{} is an even no.".format(num))
+elif num % 1 != 0:
+    print("{} is a non-integer".format(num))
+else:
+    print("{} is an odd no.".format(num))
+
+# Extras
+print("-"*50)
+if num % 4 == 0:
+    print("{} is a multiple of 4".format(num))
+else:
+    print("{} is not a multiple of 4".format(num))
+
+#    
+print("-"*50)
+num1 = float(input("Enter a no.: "))
+check = float(input("Enter another: "))
+if num1 % check == 0:
+    print("{} is fully divisible by {}".format(num1, check))
+else:
+    print("{} is not fully divisible by {}".format(num1, check))
