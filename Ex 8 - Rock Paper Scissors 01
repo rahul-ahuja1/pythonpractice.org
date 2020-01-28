@@ -1,0 +1,53 @@
+"""
+Exercise 8 (and Solution)
+Make a two-player Rock-Paper-Scissors game. 
+(Hint: Ask for player plays (using input), compare them, print out a message of congratulations 
+to the winner, and ask if the players want to start a new game)
+
+Remember the rules:
+
+1) Rock beats scissors
+2) Scissors beats paper
+3) Paper beats rock
+
+"""
+
+print("Rock, Paper, Scissors for 2 players")
+players = ["Player 1", "Player 2"]
+print("Enter r for rock, p for paper & s for scissors")
+print("-"*50)
+
+while True:
+    status = "o"
+    a = input("Player 1 choice: ")
+    b = input("Player 2 choice: ")
+    c = [a, b]
+    print("Picks:", c)
+    
+    for e in c:
+        if e not in ["r", "p", "s"]:
+            status = "q"
+            print("Invalid choices. Pick again.")
+            print("-"*50)
+            break # breaks the for loop (which is the nested loop). 
+                  # wtho this if both inputs are invalid, invalid choice msg wud b printed twice
+    
+    if status == "q":
+        continue  # starts the next instance of the while loop instead of proceeding to the code below 
+                  # so that new input can be recd
+    
+    if a == b:
+        print("It's a tie.")
+    elif "s" not in c:
+        print("Paper beats rock. Winner:",players[c.index("p")])
+    elif "p" not in c:
+        print("Rock beats scissors. Winner:",players[c.index("r")])
+    else:
+        print("Scissors beat paper. Winner:",players[c.index("s")])
+    
+    print("-"*50)
+    f = input("Enter q to quit: ")
+    print("-"*50)
+    if f == "q":
+        print("Game over.")
+        break  # breaks the infinite while loop.
