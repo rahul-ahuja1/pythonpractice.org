@@ -4,7 +4,7 @@ Ask the user for a string and print out whether this string is a palindrome or n
 (A palindrome is a string that reads the same forwards and backwards.)
 
 """
-
+# FS
 a = input("Enter text: ").lower() # without appending ".lower()", Racecar != racecaR
 if a[:] == a[::-1]:
     print(f"{a} is a palindrome")
@@ -13,3 +13,19 @@ else:
     
 # Alt.
 # list(a) == list(reversed(a))
+
+# AS
+def palindrome():
+    n = str(input("Enter a Word: "))
+    n2 = ""
+    
+    for i in range(len(n)-1,-1,-1):
+        n2 += n[i]
+        print(n,'=',n2)
+
+    if n == n2:
+        print('Palindrome')
+    else:
+        print('Not Palindrome')
+        
+palindrome()
