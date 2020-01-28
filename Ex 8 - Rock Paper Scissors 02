@@ -1,0 +1,47 @@
+"""
+Exercise 8
+Make a two-player Rock-Paper-Scissors game. 
+(Hint: Ask for player plays (using input), compare them, print out a message of congratulations 
+to the winner, and ask if the players want to start a new game)
+
+Remember the rules:
+
+1) Rock beats scissors
+2) Scissors beats paper
+3) Paper beats rock
+
+"""
+
+shorthand = {'r':'rock', 'p':'paper', 's':'scissors'}  # to minimize input typing
+rules = {'rock':'scissors', 'paper':'rock', 'scissors':'paper'} # arranged in winner:loser pattern
+
+def judgement(a, b):
+    print("-"*50)
+    print("Player picks:", a, b)
+    if a == b:
+        return("Draw")  # return stopped here  but with print("Draw"), the func proceeded with the rest of the func
+                        # return gives output that is saved, print merely displays it without saving
+    for k in rules:
+        if a == k and b == rules[k]:
+            return "Winner: Player 1"
+        else:
+            return "Winner: Player 2"
+
+def player_input_check(player):
+    msg = "Player {}'s choice: ".format(player) # it's better to define msg here bc it's used in more than 1 place
+    player_input = input(msg).lower()
+    while player_input not in shorthand:
+        print("Invalid input Player {}. Try again.".format(player))
+        player_input = input(msg).lower()
+    player_choice = shorthand[player_input] # getting value from dictionary based on a key
+    return player_choice
+    
+while True:
+    a = player_input_check("One").lower()
+    b = player_input_check("Two").lower()
+    print(judgement(a, b))
+    print("-"*50)
+    quit = input("One more game? : ").lower() # wtho lower() 'N' won't break the loop
+    if quit in ('n', 'no'):
+        print("Game over.")
+        break
