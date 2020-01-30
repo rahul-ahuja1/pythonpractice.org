@@ -1,0 +1,44 @@
+"""
+Exercise 11
+Ask the user for a number and determine whether the number is prime or not. 
+
+"""
+
+# FS1 (using functions)
+# to ensure that input is an integer
+def get_integer():
+    try:
+        num = int(input("Provide an integer: "))
+    except ValueError:
+        print("Not an integer")
+    else:
+        return num
+
+# to check for primality using range upto the sqrt of no.
+def check_primality(num):
+    if num == 1 or 0:
+        prime = False
+    elif num == 2:
+        prime = True
+    else:
+        prime = True
+        for i in range(2, int(math.sqrt(num))+1, 2):
+            if num % i == 0:
+                prime = False
+                break
+    return prime
+
+inp = get_integer()
+if check_primality(inp) == False:
+    print(inp, ": Composite No.")
+else:
+    print(inp, ": Prime")
+    
+# FS2 (using list comprehesnsion)
+print("-"*50)
+inp2 = inp
+import math
+if sum([ True if inp2 % i == 0 else False for i in ([2] + list( range(3, int(math.sqrt(inp2)), 2) )) ]):
+    print("Composite")
+else:
+    print("Prime")
