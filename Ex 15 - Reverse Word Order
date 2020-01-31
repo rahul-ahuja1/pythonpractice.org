@@ -1,0 +1,71 @@
+"""
+Exercise 15
+Write a program (using functions!) that asks the user for a long string containing multiple words.
+Print back to the user the same string, except with the words in backwards order.
+For example, say I type the string:
+  My name is Michele
+Then I would see the string:
+  Michele is name My
+shown back.
+
+"""
+
+# FS
+inp = input()
+print("="*50)
+
+# BS - one liner
+def string_reverse(s):
+    print(" ".join(s.split()[::-1]))
+
+string_reverse(inp)
+
+# Long
+print("*"*50)
+def string_reverse2(s):
+    slist = s.split()
+    rlist = slist[::-1]
+    rs = " ".join(rlist)
+    print(rs)
+    
+string_reverse2(inp)
+
+# using for loop
+print("*"*50)
+def backwardString(string):
+    vector = string.split(' ')
+    answer = ''
+    for w in range(len(vector)-1,-1,-1):
+        answer += vector[w] + ' '
+    return answer
+
+print(backwardString(inp))
+
+# using list pop()
+print("*"*50)
+def string_reverse4(s):
+    slist = s.split()
+    rs = ""     # rs = []    >> ['g', 'o', 'i', 'n', 'g', ' ',..]
+    while slist != []:
+        rs += slist.pop() + " "
+    print(rs)
+
+string_reverse4(inp)
+
+# using list index()
+print("*"*50)
+def reverse_v1(x):
+  y = x.split()
+  result = []
+  for word in y:
+    result.insert(0,word)
+  return " ".join(result)
+
+print(reverse_v1(inp))
+
+# using list reverse()
+print("*"*50)
+def reverse_v3(x):
+  return " ".join(reversed(x.split()))
+
+print(reverse_v3(inp))
