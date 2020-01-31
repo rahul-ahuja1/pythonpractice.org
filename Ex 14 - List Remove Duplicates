@@ -46,3 +46,17 @@ def unique_list3(mylist):
 
 
 print(unique_list3(a))
+
+
+# lp - using pass with if statement
+print("*"*50)
+def unique_list4(mylist):
+    ul = []
+    for i in mylist:
+        if i in ul:
+            pass
+        else:
+            ul.append(i)
+    return ul
+
+print(unique_list4(a))
