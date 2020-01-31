@@ -1,0 +1,57 @@
+"""
+Exercise 13
+Write a program that asks the user how many Fibonnaci numbers to generate and then generates them.
+Take this opportunity to think about how you can use functions.
+Make sure to ask the user to enter the number of numbers in the sequence to generate.
+(Hint: The Fibonnaci seqence is a sequence of numbers where the next number in the sequence 
+is the sum of the previous two numbers in the sequence. 
+The sequence looks like this: 0, 1, 1, 2, 3, 5, 8, 13, …)
+
+"""
+
+
+# FS1
+x = int(input("Enter no. of fibonacci nos.: "))
+print("*"*31)
+
+def fibo(x):
+    fib = [0, 1]
+    if x <= 0:
+        fib.clear()
+    if x == 1:
+        fib.pop()
+    if x > 2:
+        while len(fib) < x:          
+            fib.append(fib[-1]+fib[-2])
+    print(fib)
+    print(len(fib))
+    
+fibo(x)
+
+# FS2
+print("*"*31)
+total = int(input("How many? "))
+numfib = [0, 1]
+for i in range(1, total):
+    numfib.append(numfib[i] + numfib[i-1])
+fib = numfib[:total]
+print(fib)
+
+
+# EW
+print("*"*31)
+""" Get nth element of the Fibonacci sequence (using recursion method)"""
+def fib_el(n):
+    if n <= 0:
+        return None
+    elif n <= 2:
+        return n-1
+    elif n == 3:
+        return 1
+    else:
+        return fib_el(n-1) + fib_el(n-2)
+
+
+n = int(input("What no. Fibonacci element? : "))
+print(fib_el(n))
+
