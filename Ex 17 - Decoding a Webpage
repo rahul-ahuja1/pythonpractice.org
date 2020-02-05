@@ -1,0 +1,49 @@
+"""
+Ex 17 - Decode A Web Page (4 chillies)
+
+Use the BeautifulSoup and requests Python packages to print out a list of all the article 
+titles on the New York Times homepage.
+
+Concepts:
+Libraries
+requests
+BeautifulSoup
+
+"""
+"""
+When appropaching problems like this one, it helps to develop a plan for the program before executing it.
+
+Our plan should be as follows:
+1) Use the requests library to load the HTML of the page into Python
+2) Set up BeautifulSoup to process the HTML
+3) Find out which HTML tags contain all the titles
+4) Use BeautifulSoup to extract all the titles from the HTML
+5) Format them nicely
+
+"""
+# FS1
+import requests
+from bs4 import BeautifulSoup
+
+r = requests.get('http://www.nytimes.com')
+html_r = r.text
+
+soup = BeautifulSoup(html_r)
+article_title = soup.find_all("div", class_="css-1ez5fsm esl82me1")
+for x in range(len(article_title)):
+    print(article_title[x].text)
+ 
+ 
+ # FS2
+import requests
+from bs4 import BeautifulSoup as bs
+
+url = 'https://www.nytimes.com'
+res = requests.get(url)
+
+soup = bs(res.text, 'html.parser')
+
+articleSoup = soup.find_all('h2', class_='esl82me0')
+a = [i.get_text() for i in articleSoup]
+for i in a:
+    print(i)
