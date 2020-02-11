@@ -1,0 +1,80 @@
+Ex 20 - Element Search
+
+Write a function that takes an ordered list of numbers (ordered smallest to largest) and another number. 
+The function decides whether or not the given number is inside the list and returns (then prints) 
+an appropriate boolean.
+
+Extras:
+Use binary search.
+
+
+#### Code contains extra elements to ease visual inspection of the output and help better understand the steps involved
+
+# MS
+import random
+
+def look_in_list(mylist, k):
+    list_check = mylist
+    list_check.sort()
+    first_el = list_check[0]
+    last_el = list_check[-1]
+    n=0
+    
+    while k >= first_el and k <= last_el:
+        print("-"*25)
+        if len(list_check) < 50: # for demonstration
+            print(list_check)
+        first_el = list_check[0]
+        last_el = list_check[-1]
+        midpt = (len(list_check)-1)//2
+        midelm = list_check[midpt]
+        print("len:", len(list_check))
+        print(f'Mid point at {midpt} : {midelm}')
+        n += 1
+        
+        # this would prevent infinite loop in case k is in range (first_el < k < last_el) 
+        #  but not actually one of the elements in the list Ex: # k = 523, list_check = [520, 526]
+        
+        if len(list_check) < 5:
+            print('---- short list check ----')
+            if find(list_check, k) == True:
+                print('*'*25)
+                print(f"{k} is in the list at {list_check.index(k)}")
+                print('*'*25)
+                break
+            else:
+                print(f"{k} is not in the list")
+                break
+        
+        if k == midelm:
+            print('*'*30)
+            print(f"{k} is in the list at {midpt}")
+            print('*'*30)
+            break
+
+        elif k > midelm:
+            print(f'{k} > {midelm}')
+            print('')
+            del list_check[:midpt]
+            continue
+
+        elif k < midelm:
+            print(f'{k} < {midelm}')
+            print('')
+            del list_check[midpt+1:]
+            continue
+
+        elif IndexError:
+            print(f'{k} is not in the list.')
+            break
+    
+    if k < first_el or k > last_el:
+        print(f'{k} is out of list range.')
+        
+    print("="*40)    
+    print(f'Checks: {n}')
+    print(list_check)
+
+if __name__=='__main__':  
+    lst = [random.randint(0,1000) for i in range(1000)]
+    look_in_list(lst, 523)
