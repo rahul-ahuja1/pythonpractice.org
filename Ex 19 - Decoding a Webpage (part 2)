@@ -1,0 +1,13 @@
+"""
+Ex 19 - Decode a webpage 2 ****
+
+Using the requests and BeautifulSoup Python libraries, print to the screen the full text of 
+a an article that is long, and is split up in multiple pages.
+Your task is to print out the text to the screen so that you can read the full article without 
+having to click any buttons.
+
+Extras:
+Write this text to a .txt file.
+
+"""
+
