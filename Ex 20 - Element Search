@@ -1,3 +1,4 @@
+"""
 Ex 20 - Element Search
 
 Write a function that takes an ordered list of numbers (ordered smallest to largest) and another number. 
@@ -7,8 +8,9 @@ an appropriate boolean.
 Extras:
 Use binary search.
 
-
-#### Code contains extra elements to ease visual inspection of the output and help better understand the steps involved
+"""
+# Note:
+# Code contains extra elements to ease visual inspection of the output and help better understand the steps involved.
 
 # MS
 import random
