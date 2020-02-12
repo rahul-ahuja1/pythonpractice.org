@@ -12,7 +12,7 @@ Use binary search.
 # Note:
 # Code contains extra elements to ease visual inspection of the output and help better understand the steps involved.
 
-# MS
+# MS (extended)
 import random
 
 def look_in_list(mylist, k):
@@ -57,18 +57,14 @@ def look_in_list(mylist, k):
         elif k > midelm:
             print(f'{k} > {midelm}')
             print('')
-            del list_check[:midpt]    # del deletes irrelevent elements from the list
+            list_check = list_check[midpt:]
             continue
 
         elif k < midelm:
             print(f'{k} < {midelm}')
             print('')
-            del list_check[midpt+1:]
+            list_check = list_check[:midpt+1]
             continue
-
-        elif IndexError:
-            print(f'{k} is not in the list.')
-            break
     
     if k < first_el or k > last_el:
         print(f'{k} is out of list range.')
@@ -79,4 +75,49 @@ def look_in_list(mylist, k):
 
 if __name__=='__main__':  
     lst = [random.randint(0,1000) for i in range(1000)]
-    look_in_list(lst, 523)
+    look_in_list(lst, int(input('Find : ')))  # suggestion: 523
+    
+    
+# MS - trimmed
+import random
+
+def look_in_list(mylist, k):
+    list_check = mylist
+    list_check.sort()
+    print(list_check)
+    first_el = list_check[0]
+    last_el = list_check[-1]
+
+    while k >= first_el and k <= last_el:
+        midpt = (len(list_check)-1)//2
+        midelm = list_check[midpt]
+
+        if len(list_check) < 5:
+            if find(list_check, k) == True:
+                print(f"{k} is in the list")
+                break
+            else:
+                print(f"{k} is not in the list")
+                break
+        
+        if k == midelm:
+            print(f"{k} is in the list")
+            break
+
+        elif k > midelm:
+            list_check = list_check[midpt:]    # alt: del list_check[:midpt]
+            continue
+
+        elif k < midelm:
+            list_check = list_check[:midpt+1]
+            continue
+
+    if k < first_el or k > last_el:
+        print(f'{k} is out of list range.')
+
+
+
+if __name__=='__main__':  
+    lst = [random.randint(0,50) for i in range(50)]
+    print(lst)
+    look_in_list(lst, int(input('Find:')))
