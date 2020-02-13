@@ -37,9 +37,9 @@ def look_in_list(mylist, k):
         # this would prevent infinite loop in case k is in range (first_el < k < last_el) 
         #  but not actually one of the elements in the list Ex: # k = 523, list_check = [520, 526]
         
-        if len(list_check) < 5:
+        if len(list_check) <= 2:
             print('---- short list check ----')
-            if find(list_check, k) == True:
+            if k in list_check:
                 print('*'*25)
                 print(f"{k} is in the list at {list_check.index(k)}")
                 print('*'*25)
@@ -92,8 +92,8 @@ def look_in_list(mylist, k):
         midpt = (len(list_check)-1)//2
         midelm = list_check[midpt]
 
-        if len(list_check) < 5:
-            if find(list_check, k) == True:
+        if len(list_check) <= 2:
+            if k in list_check:
                 print(f"{k} is in the list")
                 break
             else:
@@ -105,7 +105,7 @@ def look_in_list(mylist, k):
             break
 
         elif k > midelm:
-            list_check = list_check[midpt:]    # alt: del list_check[:midpt]
+            list_check = list_check[midpt:]     # alt: del list_check[:midpt]
             continue
 
         elif k < midelm:
@@ -116,8 +116,7 @@ def look_in_list(mylist, k):
         print(f'{k} is out of list range.')
 
 
-
 if __name__=='__main__':  
-    lst = [random.randint(0,50) for i in range(50)]
-    print(lst)
+    lst = [random.randint(0,500) for i in range(500)]
+    print(sorted(lst))
     look_in_list(lst, int(input('Find:')))
