@@ -1,0 +1,80 @@
+"""
+Ex 20 - Element Search* (binary search) (using recursion)
+
+Write a function that takes an ordered list of numbers (ordered smallest to largest) and another number. 
+The function decides whether or not the given number is inside the list and returns (then prints) 
+an appropriate boolean.
+
+Extras:
+Use binary search.
+
+"""
+# Note:
+# Code contains extra elements to ease visual inspection of the output and help better understand the steps involved.
+
+# Index:
+# 1) using recursion (bare-bones version)
+# 2) using recursion (demonstrative version)
+# In another file
+# 3) using loop (bare-bones version) 
+# 4) using loop (demonstrative version)
+
+# MS 1 - using recursion (bare-bones version)
+
+import random
+
+def binary_search(lst, num):
+    lst.sort()
+    if len(lst) == 0:
+        return False
+    else:
+        found = ""
+        midpt = len(lst)//2
+        midel = lst[midpt]            
+        if midel == num:
+            found = 1
+        elif midel > num:
+            lst = lst[:midpt]
+        elif midel < num:
+            lst = lst[midpt+1:]
+        result = True if found == 1 else binary_search(lst, num)
+        return result
+
+if __name__ == '__main__':
+    a = [random.randint(0, 100) for i in range(100)]
+    print(sorted(a))
+    num = int(input('Find : '))
+    print(binary_search(a, num))
+ 
+ 
+ 
+# MS 2 - using recursion (demonstrative version)
+
+import random
+
+def binary_search(lst, num):
+    lst.sort()
+    print("*"*50)
+    if len(lst) < 32:
+        print(lst)
+    
+    if len(lst) == 0:
+        print(f'{num} is not in the list')
+    else:
+        midpt = len(lst)//2
+        midel = lst[midpt]            
+        if midel == num:
+            print(f'{num} is in the list')
+        elif midel > num:
+            print(f'{midel} > {num}')
+            lst = lst[:midpt]
+            binary_search(lst, num)
+        elif midel < num:
+            print(f'{midel} < {num}')
+            lst = lst[midpt+1:]
+            binary_search(lst, num)
+
+if __name__ == '__main__':
+    a = [random.randint(0, 1000) for i in range(1000)]
+    num = 523
+    binary_search(a, num)
