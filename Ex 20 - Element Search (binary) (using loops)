@@ -1,5 +1,5 @@
 """
-Ex 20 - Element Search*
+Ex 20 - Element Search* (binary search) (using loops)
 
 Write a function that takes an ordered list of numbers (ordered smallest to largest) and another number. 
 The function decides whether or not the given number is inside the list and returns (then prints) 
@@ -12,7 +12,56 @@ Use binary search.
 # Note:
 # Code contains extra elements to ease visual inspection of the output and help better understand the steps involved.
 
-# MS (extended)
+# Index:
+# 1,2 - using recursion in another file
+# 3) using loop (bare-bones version)
+# 4) using loop (demonstrative version)
+
+
+# MS 3 - using loop (trimmed version)
+
+import random
+
+def look_in_list(mylist, k):
+    list_check = mylist
+    list_check.sort()
+    first_el = list_check[0]
+    last_el = list_check[-1]
+
+    while k >= first_el and k <= last_el:
+        midpt = (len(list_check)-1)//2
+        midelm = list_check[midpt]
+
+        if len(list_check) <= 2:
+            if k in list_check:
+                print(f"{k} is in the list")
+                break
+            else:
+                print(f"{k} is not in the list")
+                break
+        
+        if k == midelm:
+            print(f"{k} is in the list")
+            break
+
+        elif k > midelm:
+            list_check = list_check[midpt:]     # alt: del list_check[:midpt]
+
+        elif k < midelm:
+            list_check = list_check[:midpt+1]
+
+    if k < first_el or k > last_el:
+        print(f'{k} is out of list range.')
+
+
+if __name__=='__main__':  
+    lst = [random.randint(0,500) for i in range(500)]
+    print(sorted(lst))
+    look_in_list(lst, int(input('Find:')))
+   
+
+# MS 4 - using loop (demonstrative version)
+
 import random
 
 def look_in_list(mylist, k):
@@ -24,11 +73,11 @@ def look_in_list(mylist, k):
     
     while k >= first_el and k <= last_el:
         print("-"*25)
-        if len(list_check) < 50: # for demonstration
+        if len(list_check) <= 100: # for demonstration
             print(list_check)
         first_el = list_check[0]
         last_el = list_check[-1]
-        midpt = (len(list_check)-1)//2
+        midpt = (len(list_check))//2
         midelm = list_check[midpt]
         print("len:", len(list_check))
         print(f'Mid point at {midpt} : {midelm}')
@@ -74,49 +123,6 @@ def look_in_list(mylist, k):
     print(list_check)
 
 if __name__=='__main__':  
-    lst = [random.randint(0,1000) for i in range(1000)]
-    look_in_list(lst, int(input('Find : ')))  # suggestion: 523
-    
-    
-# MS - trimmed
-import random
-
-def look_in_list(mylist, k):
-    list_check = mylist
-    list_check.sort()
-    print(list_check)
-    first_el = list_check[0]
-    last_el = list_check[-1]
-
-    while k >= first_el and k <= last_el:
-        midpt = (len(list_check)-1)//2
-        midelm = list_check[midpt]
-
-        if len(list_check) <= 2:
-            if k in list_check:
-                print(f"{k} is in the list")
-                break
-            else:
-                print(f"{k} is not in the list")
-                break
-        
-        if k == midelm:
-            print(f"{k} is in the list")
-            break
-
-        elif k > midelm:
-            list_check = list_check[midpt:]     # alt: del list_check[:midpt]
-            continue
-
-        elif k < midelm:
-            list_check = list_check[:midpt+1]
-            continue
-
-    if k < first_el or k > last_el:
-        print(f'{k} is out of list range.')
-
-
-if __name__=='__main__':  
-    lst = [random.randint(0,500) for i in range(500)]
+    lst = [random.randint(0,100) for i in range(100)]
     print(sorted(lst))
-    look_in_list(lst, int(input('Find:')))
+    look_in_list(lst, int(input('Find : ')))
