@@ -19,7 +19,10 @@ import time
 
 tic = time.perf_counter() # timer starts
 
-save_location = 'G:\Downloads'
+url = ""
+page_variable = '?page='
+save_location = ''
+
 links = []
 bodies = []
 cutoff = int(input('Cutoff limit: '))  # custom limit (to avoid an infinite loop)
@@ -28,6 +31,7 @@ page = 0
 for i in range(1, cutoff+1):
     print("*"*50)
     url_check = "https://www.fanfiction.net/s/9357902/"+str(i)+"/All-That-Remains"
+    # or url_check = url + ((url_suffix + str(i)) if i > 1 else "")
     print(f'checking: {url_check}')
     response = requests.get(url_check)
     print(f'Response: {response.status_code}')
