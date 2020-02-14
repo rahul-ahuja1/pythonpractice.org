@@ -18,7 +18,10 @@ import time
 
 tic = time.perf_counter() # timer starts
 
-save_location = 'G:\Downloads'
+url = ""
+page_variable = '?page='
+save_location = ''
+
 links = []
 bodies = []
 cutoff = int(input('Cutoff limit: '))  # custom limit (to avoid an infinite loop)
@@ -27,6 +30,7 @@ page = 0
 for i in range(1, cutoff+1):
     print("*"*50)
     url_check = "https://www.fanfiction.net/s/9357902/"+str(i)+"/All-That-Remains"
+    # or url_check = url + ((url_suffix + str(i)) if i > 1 else "")
     print(f'checking: {url_check}')
     response = requests.get(url_check)
     print(f'Response: {response.status_code}')
@@ -62,12 +66,14 @@ for i in range(1, cutoff+1):
         print(f'Website response: {response.status_code}\nPage could not be loaded.')
         print('Further links will not be checked.')
         break
-
-if links != []:        
-    with open(f'{save_location}\\{title}.txt', 'w') as file:
+        
+if links != []:
+    reply = input('Provide a filename if you want a custom name,\n else press enter to save it with its title: ')
+    filename = title if reply == "" else reply
+    with open(f'{save_location}\\{filename}.txt', 'w') as file:
         file.write(title + '\n')
         file.write('by ' + author + '\n\n')
-        file.write(f'Link: {links[0]}' + '\n\n')
+        file.write(f'Link: {url}' + '\n\n')
         page_num = 1 
         for i in bodies:
             file.write(f'\n' + "*"*10 + f' Page {page_num} ' + "*"*10 + '\n\n' + i + '\n')
