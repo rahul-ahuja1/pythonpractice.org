@@ -10,4 +10,69 @@ Extras:
 Write this text to a .txt file.
 
 """
+# Note, since I couldn't find any articles spread over more than 2 webpages. I randomly picked a story website.
+# Disclaimer: Link included only for educational & demonstrative purposes.
 
+import requests
+from bs4 import BeautifulSoup
+import time
+
+tic = time.perf_counter() # timer starts
+
+save_location = 'G:\Downloads'
+links = []
+bodies = []
+cutoff = int(input('Cutoff limit: '))  # custom limit (to avoid an infinite loop)
+page = 0
+
+for i in range(1, cutoff+1):
+    print("*"*50)
+    url_check = "https://www.fanfiction.net/s/9357902/"+str(i)+"/All-That-Remains"
+    print(f'checking: {url_check}')
+    response = requests.get(url_check)
+    print(f'Response: {response.status_code}')
+
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.text)
+
+        if i == 1:
+            article_title = soup.find_all('b', {'class':'xcontrast_txt'})
+            for t in article_title:
+                title = t.text
+
+            article_author = soup.find_all('a', {'class':'xcontrast_txt'})
+            lst = []
+            for i in article_author:
+                lst.append(i.text)
+            author = lst[2]
+
+        content = soup.find_all('div', {'class':'storytext xcontrast_txt nocopy'})
+        for i in content:
+            body = i.text
+        if body in bodies:
+            print("Page doesn't exist.")
+            break
+        else:
+            bodies.append(body)
+            links.append(url_check)
+            print('Page downloaded')
+            page += 1
+            continue
+    else:
+        print("*"*50)
+        print(f'Website response: {response.status_code}\nPage could not be loaded.')
+        print('Further links will not be checked.')
+        break
+
+if links != []:        
+    with open(f'{save_location}\\{title}.txt', 'w') as file:
+        file.write(title + '\n')
+        file.write('by ' + author + '\n\n')
+        file.write(f'Link: {links[0]}' + '\n\n')
+        page_num = 1 
+        for i in bodies:
+            file.write(f'\n' + "*"*10 + f' Page {page_num} ' + "*"*10 + '\n\n' + i + '\n')
+            page_num += 1
+
+toc = time.perf_counter()
+print(f'\nTime taken: {toc - tic:0.4} secs.')
